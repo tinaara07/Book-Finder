@@ -14,15 +14,18 @@ module.exports = {
     }
 
     if (!token) {
-      throw new Error('You are not authenticated!');
+     console.log('You are not authenticated!');
+      return req;
     }
 
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       const user = await User.findById(data._id); // Fetch user from DB
-      return { user }; // Add the user to context
+      req.user = user;
+      return req; // Add the user to context
     } catch (error) {
-      throw new Error('Invalid or expired token');
+      console.log('Invalid or expired token');
+      return req;
     }
   },
 
