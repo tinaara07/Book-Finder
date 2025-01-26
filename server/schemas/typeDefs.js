@@ -20,7 +20,7 @@ const typeDefs = gql`
     saveBook(bookInput: BookInput!): User
 
     # Remove a book from a user's savedBooks: accepts bookId, returns updated User type
-    removeBook(bookId: String!): User
+    removeBook(bookId: ID!): User
   }
 
   # User type: defines the user data fields
